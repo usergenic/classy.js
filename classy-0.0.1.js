@@ -233,6 +233,7 @@ var Classy = (function(){
     */
     'applyHashValue':function(template, class_name, value, data){
       template = jQuery(template);
+      this.mapHashValuesToTarget(template, class_name, value);
       var scoped_data = {};
       jQuery.extend(scoped_data, data);
       delete scoped_data[class_name];
@@ -256,6 +257,25 @@ var Classy = (function(){
     },
 
     'config':config,
+
+    'mapHashValuesToTarget':function(template, class_name, hash){
+      jQuery.each(hash, function(key, value){
+        var class_chain = class_name+'.'+key;
+        var value_type = support.getType(value);
+        switch(value_type){
+          case "hash":
+            classy.mapHashValuesToTarget(template, class_chain, value);
+            break;
+          case "array": /* unsupported at this time */
+            break;
+          case "simple":
+            var targets = support.mapTargets(template, class_chain);
+            jQuery.each(targets, function(i, target){
+              classy.mapSimpleValueToTarget(template, target, value);
+            });
+        }
+      });
+    },
 
     /*
       Right now Classy supports only one kind of content transformation
