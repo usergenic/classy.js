@@ -49,10 +49,8 @@ var Classy = (function(){
     */
     'classesOf':function(element){
       var value = jQuery(element).attr(config.class_attr);
-      if(typeof value == 'string' && value != ''){
-        return jQuery.trim(value).split(/ +/);
-      }
-      return([]);
+      if(this.isBlank(value)) return([]);
+      return jQuery.trim(value).split(/ +/);
     },
 
     /*
@@ -149,8 +147,7 @@ var Classy = (function(){
       it up.  or don't.  nobody cares.
     */
     'apply':function(template, data){
-      template = jQuery(template);
-      template.each(function(){
+      return jQuery(template).each(function(){
         var template = jQuery(this);
         var classes = support.classesOf(this);
         var array_or_hash_applied = false;
@@ -167,7 +164,7 @@ var Classy = (function(){
                 array_or_hash_applied = true;
                 break;
               case "simple":
-                classy.applySimpleValue(template, class_name, value);
+                classy.applySimpleValue(template, class_name, value, data);
                 break;
             }
           }
@@ -178,7 +175,6 @@ var Classy = (function(){
           });
         }
       });
-      return template;
     },
 
     /*
@@ -220,7 +216,7 @@ var Classy = (function(){
             classy.applyArrayValue(clone, class_name, value, scoped_data);
             break;
           case "simple":
-            classy.applySimpleValue(clone, class_name, scoped_value);
+            classy.applySimpleValue(clone, class_name, value, scoped_data);
             break;
         }
         template.before(clone);
@@ -249,10 +245,28 @@ var Classy = (function(){
       element provided, based on mapping which may be present
       in the map_attr or the default_map_target.
     */
-    'applySimpleValue':function(template, class_name, value){
+    'applySimpleValue':function(template, class_name, value, data){
       template = jQuery(template);
       var targets = support.mapTargets(template, class_name);
+      var classy = this;
       jQuery.each(targets, function(i, target){
+        classy.mapSimpleValueToTarget(template, target, value);
+      });
+      return template;
+    },
+
+    'config':config,
+
+    /*
+      Right now Classy supports only one kind of content transformation
+      via the substitution notation, whereby the target attribute name
+      is suffixed with brackets containing the target of the substitution.
+      In order to make it easy to extend Classy, it feels like this
+      should be abstracted out, but there is at present no time or demand
+      for such a thing, so the following code is more hacky than it should
+      be.
+    */
+    'mapSimpleValueToTarget':function(template, target, value){
         var target_with_replace_spec = target.match(/^([^\[]+)\[([^\]]+)\]$/);
         if(target_with_replace_spec){
           target_with_replace_spec.shift();
@@ -289,8 +303,6 @@ var Classy = (function(){
           default:
             template.attr(target, target_value);
         };
-      });
-      return template;
     },
 
     /*
@@ -305,7 +317,9 @@ var Classy = (function(){
       );
       this.apply(template, data);
       return template.html();
-    }
+    },
+
+    'support':support
 
   };
 
