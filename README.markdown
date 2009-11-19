@@ -25,7 +25,7 @@ Here is a simple example of a Classy template:
 
 And here is some javascript:
 
-    var template = $('#contact_template').html();
+    var template = $($('#contact_template').html());
     Classy.apply(template,{
       'contact':{
         'name':{
