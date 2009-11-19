@@ -62,14 +62,14 @@ And then you get this in the document body:
         </ul>
       </div>
 
-You can do things like target specific attributes:
+You can do things like target specific attributes, and you can even reference sub properties of a hash with notation.like.this:
       
-      var data = {'url':'http://usergenic.com','name':'My Site'};
-      var html = Classy.render('<a class="name url" data-map="url:href" />', data);
+      var data = {'link':'url':'http://usergenic.com','name':'My Site'}};
+      var html = Classy.render('<a class="link" data-map="link.url:href,link.name:text" />', data);
 
 The value of html is now:
 
-      <a class="name url" data-map="url:href "href="http://usergenic.com">My Site</a>
+      <a class="link" data-map="link.url:href,link.name:text" href="http://usergenic.com">My Site</a>
 
 Anyways, I'll expand this little example at some point.  But now I have to
 actually *use* Classy to do some work.
