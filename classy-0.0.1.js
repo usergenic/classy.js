@@ -16,11 +16,13 @@
 
 */
 
-// You can rename Classy to whatever you want, right here...
+/*
+  You can rename Classy to whatever you want, right here...
+*/
 var Classy = (function(){
   
   /*
-    you can override the attribute names and
+    You can override the attribute names and
     defaults that Classy uses by setting your
     own Classy.config.* values in your scripts.
   */
@@ -34,15 +36,15 @@ var Classy = (function(){
   };
 
   /*
-    support namespace includes secondary
+    Support namespace includes secondary
     functions for Classy and is not intended 
-    for use as a public API.  subject to
+    for use as a public API.  Subject to
     change often.
   */
   var support = {
 
     /*
-      returns an array of CSS class names attached to
+      Returns an array of CSS class names attached to
       an element.
     */
     'classesOf':function(element){
@@ -54,7 +56,7 @@ var Classy = (function(){
     },
 
     /*
-      determines which of 3 categories a
+      Determines which of 3 categories a
       value falls into:
         - "hash" (json object: aka {"key":"value"})
         - "array" (array: aka ["item0","item1","item2"])
@@ -75,7 +77,7 @@ var Classy = (function(){
     },
 
     /*
-      determine if the value is null, an empty string,
+      Determine if the value is null, an empty string,
       empty array, or empty object.
     */
     'isBlank':function(value){
@@ -88,7 +90,7 @@ var Classy = (function(){
     },
 
     /*
-      determine if the value is neither null, an empty
+      Determine if the value is neither null, an empty
       string, empty array, or empty object.
     */
     'isPresent':function(value){
@@ -96,9 +98,9 @@ var Classy = (function(){
     },
     
     /*
-      parses the map_attr for the element and returns
+      Parses the map_attr for the element and returns
       the referenced target for the class_name provided.
-      if no explicit mapping is defined, returns the
+      If no explicit mapping is defined, returns the
       value of default_map_target from config.
     */
     'mapTargets':function(template, class_name){
@@ -123,7 +125,7 @@ var Classy = (function(){
     },
 
     /*
-      returns the count of items in an object or array
+      Returns the count of items in an object or array
       by using the native for x in y implementation.
     */
     'sizeOf':function(value){
@@ -140,15 +142,13 @@ var Classy = (function(){
   var classy = {
 
     /*
-      given a json data hash and a template element or
+      Given a json data hash and a template element or
       html string source, return it in a jQuery object
       with data injected into the appropriate nooks and
-      crannies.  yes, cranny is a technical term.  look
+      crannies.  Yes, cranny is a technical term.  look
       it up.  or don't.  nobody cares.
     */
     'apply':function(template, data){
-      var context = {};
-      jQuery.extend(content, data);
       template = jQuery(template);
       template.each(function(){
         var template = jQuery(this);
@@ -182,12 +182,12 @@ var Classy = (function(){
     },
 
     /*
-      an array is applied by doing one of two things:
-        1. if the element has a corresponding member_attr, we will
+      An array is applied by doing one of two things:
+        1. If the element has a corresponding member_attr, we will
            do a trick by applying a new context where the class_name
            is replaced with the key in member_attr.  this defers the
            array/cloning magic to situation 2...
-        2. with no member_attr, the matching element is replaced with
+        2. With no member_attr, the matching element is replaced with
            a collection of the number of items in the array applied
            to the element as template source.
     */
@@ -230,8 +230,8 @@ var Classy = (function(){
     },
 
     /*
-      a hash is applied by updating the context data for sub-elements
-      by using values from the hash.  in many ways this is like the
+      A hash is applied by updating the context data for sub-elements
+      by using values from the hash.  In many ways this is like the
       scope change which occurs when using the with() operator in
       JavaScript.
     */
@@ -245,7 +245,7 @@ var Classy = (function(){
     },
 
     /*
-      a simple value is applied to the attribute(s) of the
+      A simple value is applied to the attribute(s) of the
       element provided, based on mapping which may be present
       in the map_attr or the default_map_target.
     */
@@ -294,7 +294,7 @@ var Classy = (function(){
     },
 
     /*
-      given data in a json hash and a string containing
+      Given data in a json hash and a string containing
       a classy html template, returns generated html.
     */
     'render':function(template, data){

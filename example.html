@@ -28,14 +28,18 @@
         $("body").html(generated_html);
       });
     </script>
-    <script id="band_template" type="classy/template">
+  </head>
+  <body>
+    <div id="band_template">
       <div class="band">
         <h1 class="name"></h1>
         <table class="members" data-member="person">
           <thead>
-            <th>#</th>
-            <th>Member Name</th>
-            <th>Instruments Played</th>
+            <tr>
+              <th>#</th>
+              <th>Member Name</th>
+              <th>Instruments Played</th>
+            </tr>
           </thead>
           <tr class="person" data-index="num">
             <td class="num"></td>
@@ -48,8 +52,6 @@
           </tr>
         </table>
       </div>
-    </script>
-  </head>
-  <body>
+    </div>
   </body>
 </html>
