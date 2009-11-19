@@ -15,9 +15,8 @@ Here is a simple example of a Classy template:
           <span class="last"></span>
         </h1>
         <ul class="phone_numbers" data-member="phone_number">
-          <li class="phone_number">
+          <li class="phone_number #_phone" data-map="phone_number.type:class[#]">
             <span class="number"></span>
-            <span class="type"></span>
           </li>
         </ul>
       </div>
@@ -54,13 +53,11 @@ And then you get this in the document body:
           <span class="last">Mystery</span>
         </h1>
         <ul class="phone_numbers" data-member="phone_number">
-          <li class="phone_number">
+          <li class="phone_number mobile_phone" data-map="phone_number.type:class[#]">
             <span class="number">(666) 666-6666</span>
-            <span class="type">mobile</span>
           </li>
-          <li class="phone_number">
+          <li class="phone_number home_phone" data-map="phone_number.type:class[#]">
             <span class="number">(555) 555-5555</span>
-            <span class="type">home</span>
           </li>
         </ul>
       </div>
