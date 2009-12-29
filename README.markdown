@@ -64,7 +64,7 @@ And then you get this in the document body:
 
 You can do things like target specific attributes, and you can even reference sub properties of a hash with notation.like.this:
       
-      var data = {'link':'url':'http://usergenic.com','name':'My Site'}};
+      var data = {'link':{'url':'http://usergenic.com','name':'My Site'}};
       var html = Classy.render('<a class="link" data-map="link.url:href,link.name:text" />', data);
 
 The value of html is now:
